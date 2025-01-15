@@ -29,13 +29,7 @@ def EquationNode(equation: str, a:Optional[int|float] = 0, b:Optional[int|float]
     """
 
     import numpy as np
-    
-    a=a
-    b=b
-    c=c
-    d=d
-    e=e
-    f=f
+
     result = eval(equation)
     
     return result
