@@ -24,6 +24,28 @@ def LammpsCalcMinimize(pr, structure, job_name:str, pot_list_index:int, f_tol: O
     return job
 
 @as_function_node
+def LammpsCalcOptimize(pr, structure, job_name:str, pot_list_index:int, f_tol: Optional[float|int], min_style:str, del_ex_job:bool = False):
+    """
+    pr: pyiron_atomistics project
+    structure: ase object from pyiron_atomistics
+    pot_list_index: chosen potential from list
+    f_tol: force tolerance for convergence
+    min_style: minimization algorithm e.g., "fire", "cg", "quickmin" etc.
+    del_ex_job: delete existing job?
+    """
+    
+    pr = pr
+    structure = structure
+    job = pr.create.job.Lammps(job_name=job_name, delete_existing_job=del_ex_job)
+    job.structure = structure.copy()
+    job.potential = job.list_potentials()[pot_list_index]
+    job.calc_minimize(ionic_force_tolerance=f_tol, pressure=0)
+    print("Job name: \"" + job_name + "\"")
+    print("Chosen potential: " + job.list_potentials()[pot_list_index])
+    
+    return job
+
+@as_function_node
 def LammpsMD(pr, structure, job_name:str, pot_list_index:int, temperature: Optional[float|int], pressure:Optional[float|int], n_ionic_steps: int, del_ex_job:bool = False):
     """
     pr: pyiron_atomistics project
