@@ -20,3 +20,21 @@ def Multiplication(variable1, variable2:Optional[int|float]) -> int|float:
 def Division(variable1, variable2:Optional[int|float]) -> int|float:
     qnt = variable1 / variable2
     return qnt
+
+@as_function_node("result")
+def EquationNode(equation: str, a:Optional[int|float] = 0, b:Optional[int|float] = 0, c:Optional[int|float] = 0, d:Optional[int|float] = 0, e:Optional[int|float] = 0, f:Optional[int|float] = 0) -> int|float:
+    """
+    Equation: enter an equation with up to 6 variables, can include numpy (as np)
+    a,b,c,d,e,f: the variables in the equation
+    """
+
+    import numpy as np
+    
+    a=a
+    b=b
+    c=c
+    d=d
+    e=e
+    result = eval(equation)
+    
+    return result
