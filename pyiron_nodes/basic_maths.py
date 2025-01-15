@@ -35,6 +35,7 @@ def EquationNode(equation: str, a:Optional[int|float] = 0, b:Optional[int|float]
     c=c
     d=d
     e=e
+    f=f
     result = eval(equation)
     
     return result
