@@ -23,7 +23,7 @@ def CreateStructure(pr, element:str, bravais_lattice: Optional[str], a: Optional
     
     return structure
 
-@as_function_node("repeated_structre")
+@as_function_node("repeated_structure")
 def RepeatStructure(structure, repetition_x: int, repetition_y: int, repetition_z: int):
     """
     structure: ase object from pyiron_atomistics
@@ -38,3 +38,33 @@ def VisualizeStructure(structure):
     """
     
     return structure.plot3d()
+
+@as_function_node("vacancy_structure")
+def CreateVacancies(structure, indices: Optional[str|list[int]] = '0'):
+    """
+    indices: list of atoms to be removed, can be a list of integers (indices) or a string with spaces between indices e.g., '0 4 8'
+    structure: ase object from pyiron_atomistics
+    """
+
+    if isinstance(indices, str):
+        indices = [int(i) for i in indices.split()]
+        
+    del structure[indices]
+    
+    return structure
+
+@as_function_node("substitute_structure")
+def SubstituteAtoms(structure, substitute_species: str, subsitute_magmom:Optional[int|float], indices: Optional[str|list[int]] = '0'):
+    """
+    indices: list of atoms to be removed, can be a list of integers (indices) or a string with spaces between indices e.g., '0 4 8'
+    structure: ase object from pyiron_atomistics
+    """
+
+    if isinstance(indices, str):
+        indices = [int(i) for i in indices.split()]
+        
+    for i in indices:
+        structure[i] = substitute_species
+        structure[i].magmom = subsitute_magmom
+    
+    return structure
