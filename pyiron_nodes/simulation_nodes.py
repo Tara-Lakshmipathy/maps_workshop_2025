@@ -1,4 +1,5 @@
 from pyiron_workflow import as_function_node, as_macro_node, as_dataclass_node
+from dataclasses import dataclass
 from typing import Optional
 
 @as_function_node
@@ -108,6 +109,7 @@ def MurnaghanJob(pr, job, murn_job_name:str, n_sample_points:int, equation_of_st
     return murn
 
 @as_dataclass_node
+@dataclass
 class MurnaghanParameters():
     murn_job_name: Optional[str] = 'murn'
     n_sample_points: Optional[int] = 7
@@ -120,7 +122,7 @@ class MurnaghanParameters():
     min_style: Optional[str] = 'cg'
 
 @as_macro_node("murn")
-def MurnaghanLammpsMacro(self, pr, structure, parameters: Optional[MurnaghanParameters.dataclass] = MurnaghanParameters.dataclass(), del_ex_job:bool = False):
+def MurnaghanLammpsMacro(self, pr, structure, parameters, del_ex_job:bool = False):
     """
     pr: pyiron_atomistics project
     structure: ase object from pyiron_atomistics
