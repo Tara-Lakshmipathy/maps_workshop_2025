@@ -1,4 +1,5 @@
 # pyironflow
+The visual programmming interface `pyironflow` is a gui skin based on [ReactFlow](https://reactflow.dev/) that works on top of [pyiron_workflow](https://github.com/pyiron/pyiron_workflow).
 
 ## Table of Contents
 1. [Installing pyironflow](#installing_pyironflow)
@@ -8,8 +9,7 @@
 5. [Other features](#other_features)
 6. [Node status](#node_status)
 7. [Known bugs](#known_bugs)
-
-The visual programmming interface `pyironflow` is a gui skin based on [ReactFlow](https://reactflow.dev/) that works on top of [pyiron_workflow](https://github.com/pyiron/pyiron_workflow). 
+8. [Installation for developers](#dev_install)
 
 ## Installing-pyironflow <a name="installing_pyironflow"></a>
 A package of `pyironflow` is available in [conda-forge](https://anaconda.org/conda-forge/pyironflow). This can be installed using:
@@ -81,9 +81,16 @@ pf = PyironFlow([wf], root_path='./pyiron_nodes' gui_layout=gui_layout)
   - Red is for failed nodes
 - Currently, the statuses are only updated after the execution.
 
-# Known bugs <a name="known_bugs"></a>
+## Known bugs <a name="known_bugs"></a>
 - Nodes and edges can sometimes disappear. Open a different file in the notebook (by clicking on the folder icon on the top-left) and then reopen this file to make the nodes/edges reappear.
 - Sometimes, clicking on an output port to start forming a data channel will not cause a line to appear. The solution to this is the same as the previous issue.
 - It may be needed to click on nodes, edges and node-library items twice to activate them.
 - The "Create Macro" functionality is still under development and may throw unexpted errors (e.g. * is already the label for a child) even with a valid selection. Reinstantiate the widget in such cases.
 - Resizing the widget using GUILayout() sometimes takes a couple of attempts to reflect changes
+
+## Installation for developers <a name="dev_install"></a>
+- Clone the repository to your file system
+- Install dependecies into a conda environment: `conda install -c conda-forge pyiron_workflow jupyterlab nodejs esbuild anywidget ipytree` as of 26.02.2025
+- Install npm packages in the folder that has been cloned (the name of the folder would be "pyironFlow"): `npm install @anywidget/react@0.0.7 @xyflow/react@12.3.5 elkjs@0.9.3 react@18.3.1 react-dom@18.3.1`
+- Run the following command in the same folder: `esbuild js/widget.jsx --minify --format=esm --bundle --outdir=pyironflow/static`
+- Launch a jupyter notebook from the same folder and import the pyironflow module as [usual](#launching_pyironflow).
