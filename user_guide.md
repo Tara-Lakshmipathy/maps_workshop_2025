@@ -66,7 +66,10 @@ pf = PyironFlow([wf], root_path='./pyiron_nodes' gui_layout=gui_layout)
 - A workflow in the gui can be exported out using: `wf_gui = pf.get_workflow()`. This new object behaves like a conventional `pyiron_workflow` object.
 
 ## Node status
-- The square box next to the name of the node indicates the execution status of the node: White is for nodes not yet executed Green is for nodes that have been successfully executed Red is for failed nodes
+- The square box next to the name of the node indicates the execution status of the node:
+  - White is for nodes not yet executed
+  - Green is for nodes that have been successfully executed
+  - Red is for failed nodes
 - Currently, the statuses are only updated after the execution.
 
 # Known bugs
@@ -74,3 +77,4 @@ pf = PyironFlow([wf], root_path='./pyiron_nodes' gui_layout=gui_layout)
 - Sometimes, clicking on an output port to start forming a data channel will not cause a line to appear. The solution to this is the same as the previous issue.
 - It may be needed to click on nodes, edges and node-library items twice to activate them.
 - The "Create Macro" functionality is still under development and may throw unexpted errors (e.g. * is already the label for a child) even with a valid selection. Reinstantiate the widget in such cases.
+- Resizing the widget using GUILayout() sometimes takes a couple of attempts to reflect changes
